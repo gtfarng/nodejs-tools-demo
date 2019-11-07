@@ -4,54 +4,42 @@ const router = express.Router();
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const multer  = require('multer')
+const QRCode = require('qrcode')
 
 app.use(cors())
 app.use(bodyParser.json() ,router)
 app.use(bodyParser.urlencoded({extended:true}) ,router)
 
-
-
-    
-
-
-const upload = multer({ dest: 'uploads/' })
- 
 router.route('/')
     .get( (req, res) =>  res.send("Hello, World!!!") )
 
-router.route('/api')
-    .get( (req, res) =>  res.send("API Index!!!") )
+
  
-router.route('/api/InsertData') 
-    .get( (req, res) =>  res.send("Insert Data !!!") )
+//QRCode.toDataURL('#GTfarng',  (err, url)=> {
+//  console.log(url)
+//})
 
-    .post( upload.single('image'),  (req, res, next)=> {
-  // req.file is the `avatar` file
-  // req.body will hold the text fields, if there were any
-  let data={}
-  data.name=req.body.name
-  data.surname=req.body.surname
-  data.image=req.file.image
-  res.json(data)
-
+/*
+QRCode.toString('49-15050|60-055147|OPDMEDICINE|OPDCARD|42712|2017-01-25',{type:'terminal'},  (err, url)=> {
+  console.log(url)
 })
-/* 
-app.post('/photos/upload', upload.array('photos', 12), function (req, res, next) {
-  // req.files is array of `photos` files
-  // req.body will contain the text fields, if there were any
-})
- 
-var cpUpload = upload.fields([{ name: 'avatar', maxCount: 1 }, { name: 'gallery', maxCount: 8 }])
-app.post('/cool-profile', cpUpload, function (req, res, next) {
-  // req.files is an object (String -> Array) where fieldname is the key, and the value is array of files
-  //
-  // e.g.
-  //  req.files['avatar'][0] -> File
-  //  req.files['gallery'] -> Array
-  //
-  // req.body will contain the text fields, if there were any
-})
-
 */
+var opts = {
+  errorCorrectionLevel: 'H',
+  type: 'image/png',
+  width:400,
+  quality: 0.3,
+  margin: 1,
+  color: {
+    dark:"#000000",
+    light:"#FFFFFF"
+  }
+}
 
-app.listen(8000, () => console.log('server is running:8000'))
+
+QRCode.toFile('./demo.png', '49-15050|60-055147|OPDMEDICINE|OPDCARD|42712|2017-01-25', opts,  (err)=> {
+  if (err) throw err
+  console.log('done')
+})
+
+//app.listen(8000, () => console.log('server is running:8000'))
