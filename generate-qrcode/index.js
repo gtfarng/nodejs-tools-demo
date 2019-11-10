@@ -37,7 +37,7 @@ var opts = {
 }
 
 
-QRCode.toFile('./demo.png', '49-15050|60-055147|OPDMEDICINE|OPDCARD|42712|2017-01-25', opts,  (err)=> {
+QRCode.toFile('./test.png', '00-00000|00-000000|OPDMEDICINE|OPDCARD|00000|2019-11-11', opts,  (err)=> {
   if (err) throw err
   console.log('done')
 })
