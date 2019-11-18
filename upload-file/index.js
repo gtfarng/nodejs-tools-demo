@@ -22,7 +22,7 @@ router.route('/')
 router.route('/api')
     .get( (req, res) =>  res.send("API Index!!!") )
  
-router.route('/api/InsertData') 
+router.route('/api/Doctornote/6/InsertData') 
     .get( (req, res) =>  res.send("Insert Data !!!") )
 
     .post( upload.single('image'),  (req, res, next)=> {
