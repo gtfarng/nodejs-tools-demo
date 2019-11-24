@@ -5,11 +5,14 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const multer  = require('multer')
 const path = require('path')
+
 app.use(cors())
 app.use(bodyParser.json() ,router)
 app.use(bodyParser.urlencoded({extended:true}) ,router)
 
 //const upload = multer({ dest: 'uploads/' })
+
+data={images:[]}
 
 const upload = multer({ 
     storage:multer.diskStorage({
@@ -23,6 +26,7 @@ const upload = multer({
             //cb(null, Date.now() +'-' +req.body.hn +'.'+file.mimetype.substring (6,10))
             cb(null, req.body.hn +'-' +Date.now() +'.'+file.mimetype.substring (6,10))
            // console.log(file.mimetype.substring (6,10))
+           
         }
     }),
     fileFilter:(req, file, cb)=>{
@@ -40,7 +44,8 @@ const upload = multer({
 router.route('/api/Doctornote/6/InsertData') 
     .get( (req, res) =>  res.send("Insert Data !!!") )
 
- /*   .post( upload.single('image'),  (req, res, next)=> {
+ /*  
+    .post( upload.single('image'),  (req, res, next)=> {
   // req.file is the `avatar` file
   // req.body will hold the text fields, if there were any
   console.log(req.file)
@@ -59,11 +64,6 @@ router.route('/api/Doctornote/6/InsertData')
     
 .post( upload.array('images', 12),  (req, res, next)=> {
 
-  let data={images:[]}
-
-  //data.name=req.body.name
-  //data.surname=req.body.surname
-
   data.SCRunno=req.body.scrunno
   data.hn=req.body.hn
   data.doctor_code=req.body.doctor_code
@@ -77,10 +77,9 @@ router.route('/api/Doctornote/6/InsertData')
 //data.type       /res.json('dnt') 
 //data.pdf_url    /res.json('http://192.168.50.61/Doctornote/'+pid+'/img/')
 //data.date       /res.json('YYYY-MM-DD')
-//data.vn       /res.json(vn)
-//data.id       /res.json(pid)
+//data.vn         /res.json(vn)
+//data.id         /res.json(pid)
 
-//data.date='2019-11-11'
   data.vn="60-513440"
   data.id="3-6607-00239-82-0"
   data.pid=data.id.substring (0,1).concat(data.id.substring (2,6)).concat(data.id.substring (7,12)).concat(data.id.substring (13,15)).concat(data.id.substring (16,17))
@@ -123,9 +122,10 @@ router.route('/api/Doctornote/6/InsertData')
   data.message="complete!!!"
  
 
- //console.log(req.body)
+ //console.log(data.message)
 
   res.json(data)
+   // res.json({code:200, message:'complete!!!'})
 })
 
 

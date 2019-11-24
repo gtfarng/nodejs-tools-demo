@@ -11,9 +11,6 @@ app.use(bodyParser.urlencoded({extended:true}) ,router)
 
 
 
-    
-
-
 const upload = multer({ dest: 'uploads/' })
  
 router.route('/')

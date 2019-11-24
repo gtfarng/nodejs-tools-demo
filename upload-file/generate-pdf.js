@@ -6,13 +6,13 @@ let reportDoc = new pdf({ margin: 40 })
 let data={}
 data.cc="อาการปกติดีฟังผล Lab"
 
-reportDoc.pipe(fs.createWriteStream('report-demos.pdf'))
+reportDoc.pipe(fs.createWriteStream('report-demo.pdf'))
 
 reportDoc.image('./img/logos.png', 30, 30, { width: 60 });
 reportDoc.image('./img/qrs.png', 500, 30, { width: 60, align: "right" });
 
 reportDoc.font('./fonts/THSarabunNew Bold.ttf')
-    .fontSize(18)
+    .fontSize(22)
     .text('โรงพยาบาลพุทธชินราช พิษณุโลก', 100, 25)
 
 reportDoc.font('./fonts/THSarabunNew Bold.ttf')
